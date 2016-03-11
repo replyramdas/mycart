@@ -17,6 +17,9 @@ public class UserLogin {
 	@Column(name="username")
 	private String username;
 	
+	@Column(name="company_code")
+	private String companyCode;
+	
 	@Column(name="password")
 	private String password;
 	
@@ -80,5 +83,13 @@ public class UserLogin {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}	
+	
+	public String getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
 	}	
 }

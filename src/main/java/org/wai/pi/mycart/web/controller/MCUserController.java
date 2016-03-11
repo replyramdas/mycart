@@ -49,7 +49,7 @@ public class MCUserController {
 	
 	@RequestMapping(params="form", method=RequestMethod.POST)
 	public String createUserProfile(@ModelAttribute UserProfile profile, Model model){
-		if(!userService.isUserNameUnique(profile.getUserLogin().getUsername(),profile.getAccountName())){
+		if(!userService.isUserNameUnique(profile.getUserLogin().getUsername(),profile.getUserLogin().getCompanyCode())){
 			model.addAttribute("error", "User name is already taken. Please try a different user name");
 			model.addAttribute("userCreateUrl", MCURIConstants.userCreate);
 			return "user/error";
@@ -71,9 +71,8 @@ public class MCUserController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof MCUser){
 			currentUser = (MCUser)principal;
-		}
-		if(currentUser != null){
 			userLogin.setUsername(currentUser.getUsername());
+			//userLogin.se
 		}
 		uiModel.addAttribute("userLogin", userLogin);
 		return "user/changepassword";

@@ -28,13 +28,6 @@ public class UserDAOImpl implements UserDAO {
 		return profile;
 	}
 	
-//    @Override
-//	public UserProfile getUserProfile(String userName) {
-//			TypedQuery<UserProfile> query = em.createQuery("Select userProfile from UserProfile userProfile where userProfile.userLogin.username = :userName", UserProfile.class);
-//			query.setParameter("userName", userName);
-//			return query.getSingleResult();
-//	}
-	
 	@Override
 	public List<SecurityQuestion> getListOfQuestions() {
 		return em.createQuery("Select secQuestion from SecurityQuestion secQuestion",SecurityQuestion.class).getResultList();
@@ -58,10 +51,10 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public UserProfile getUserProfile(String userName, String accountName) {
-		TypedQuery<UserProfile> query = em.createQuery("Select userProfile from UserProfile userProfile where userProfile.userLogin.username = :userName and userProfile.accountName = :accountName", UserProfile.class);
+	public UserProfile getUserProfile(String userName, String companyCode) {
+		TypedQuery<UserProfile> query = em.createQuery("Select userProfile from UserProfile userProfile where userProfile.userLogin.username = :userName and userProfile.userLogin.companyCode = :companyCode", UserProfile.class);
 		query.setParameter("userName", userName);
-		query.setParameter("accountName", accountName);
+		query.setParameter("companyCode", companyCode);
 		return query.getSingleResult();
 	}
 

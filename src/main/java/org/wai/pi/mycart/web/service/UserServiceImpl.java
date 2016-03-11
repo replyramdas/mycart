@@ -33,10 +33,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isUserNameUnique(String userName, String accountName) {
+	public boolean isUserNameUnique(String userName, String companyCode) {
 		UserProfile profile = null;
 		try{
-			profile = userDao.getUserProfile(userName,accountName);
+			profile = userDao.getUserProfile(userName,companyCode);
 		}catch(EmptyResultDataAccessException exp){
 			logger.info("userName:{} doest not exist",userName);
 		}
@@ -73,8 +73,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserProfile getUserProfile(String userName, String accountName) {
-		return userDao.getUserProfile(userName, accountName);
+	public UserProfile getUserProfile(String userName, String companyCode) {
+		return userDao.getUserProfile(userName, companyCode);
 	}
 
 	@Override

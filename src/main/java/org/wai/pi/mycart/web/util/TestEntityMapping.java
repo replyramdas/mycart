@@ -17,12 +17,14 @@ public class TestEntityMapping {
 	    adminLogin.setUsername("rsawant");
 	    adminLogin.setPassword("$2a$10$3587PkU.ZYPiSF95JlJL6uXVY/6L1RVCu7tq7Yu0IlzwVpyecXHAS");
 	    adminLogin.setEnabled(true);
+	    adminLogin.setCompanyCode("mycomp");
 
 	    
 	    UserLogin userLogin1 = new UserLogin();
 	    userLogin1.setUsername("sashi");
 	    userLogin1.setPassword("$2a$10$vt33gtp.OF0aKpzdL.MVG.8GLHsb2kn8w.QG8Hm5WogxHh9N.O/oy");
 	    userLogin1.setEnabled(true);
+	    userLogin1.setCompanyCode("mycomp");
 
 	    UserLogin userLogin2 = new UserLogin();
 	    userLogin2.setUsername("feroz");
@@ -50,7 +52,6 @@ public class TestEntityMapping {
 	    adminProfile.setFirstName("Ramdas");
 	    adminProfile.setLastName("Sawant");
 	    adminProfile.setEmail("replyramdas@gmail.com");
-	    adminProfile.setAccountName("mycomp");
 	    adminProfile.setRole(adminRole);
 	    
 	    UserProfile authorProfile = new UserProfile();
@@ -58,7 +59,6 @@ public class TestEntityMapping {
 	    authorProfile.setFirstName("Sashi");
 	    authorProfile.setLastName("LastName");
 	    authorProfile.setEmail("sashi@gmail.com");
-	    authorProfile.setAccountName("mycomp");
 	    authorProfile.setRole(authorRole);
 
 	    UserProfile userProfile = new UserProfile();

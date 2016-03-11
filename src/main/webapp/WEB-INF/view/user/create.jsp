@@ -17,8 +17,8 @@
 <form:form method="POST" action="${createuser}" modelAttribute="profile" name="form">
    <table>
     <tr>
-        <td><form:label path="accountName">Company Code</form:label></td>
-        <td><form:input path="accountName" ng-model="companyCode"/></td>
+        <td><form:label path="userLogin.companyCode">Company Code</form:label></td>
+        <td><form:input path="userLogin.companyCode" ng-model="companyCode"/></td>
     </tr>  
     <tr>
         <td><form:label path="userLogin.username">User Name</form:label></td>

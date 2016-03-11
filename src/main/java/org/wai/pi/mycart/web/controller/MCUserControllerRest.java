@@ -17,9 +17,9 @@ public class MCUserControllerRest {
 	UserService userService;
 	
 	
-	@RequestMapping(value="/{accountName}/{userName}", params={"isUnique"}, method=RequestMethod.GET)
-	public String isUniqueName(@PathVariable String userName, @PathVariable String accountName){
+	@RequestMapping(value="/{companyCode}/{userName}", params={"isUnique"}, method=RequestMethod.GET)
+	public String isUniqueName(@PathVariable String userName, @PathVariable String companyCode){
 		
-		return userService.isUserNameUnique(userName,accountName)?"true":"false";
+		return userService.isUserNameUnique(userName,companyCode)?"true":"false";
 	}
 }

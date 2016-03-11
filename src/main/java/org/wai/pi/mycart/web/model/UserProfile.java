@@ -33,9 +33,6 @@ public class UserProfile {
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="account")
-	private String accountName;
-	
 	@Column(name="sec_question")
 	private String securityQuestion;
 	
@@ -99,13 +96,7 @@ public class UserProfile {
 		this.email = email;
 	}
 
-	public String getAccountName() {
-		return accountName;
-	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
-	}
 
 	public Role getRole() {
 		return role;
