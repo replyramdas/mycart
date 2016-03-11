@@ -14,7 +14,9 @@ public class UserLogin {
 	@GeneratedValue
 	private long id;
 	
-	@Column(name="username")
+	
+	//TODO: temp fix. company and username should be composite primary key	
+	@Column(name="username", unique=true, nullable=false)
 	private String username;
 	
 	@Column(name="company_code")

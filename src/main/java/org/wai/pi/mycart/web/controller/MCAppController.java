@@ -6,17 +6,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.wai.pi.mycart.web.MCURIConstants;
 
 @Controller
-@RequestMapping(value="/app")
+@RequestMapping(value=MCURIConstants.mycartAppUrl)
 public class MCAppController {
 
+	
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAppView(Model model){
 		model.addAttribute("myuser", getPrincipal());
 		return "app";
 	}
+	
+	
 	
     private String getPrincipal(){
         String userName = null;

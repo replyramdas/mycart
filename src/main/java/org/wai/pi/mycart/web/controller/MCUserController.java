@@ -78,6 +78,7 @@ public class MCUserController {
 		MCUser currentUser = null;
 		UserLogin userLogin = new UserLogin();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
 		if(principal instanceof MCUser){
 			currentUser = (MCUser)principal;
 			userLogin.setUsername(currentUser.getUsername());
@@ -102,6 +103,43 @@ public class MCUserController {
 			profile.getUserLogin().setFirstTimeLogin(false);
 			userService.updateUserProfile(profile);
 		}		
-		return "redirect:"+MCURIConstants.mycartAppUrl;
+		return "redirect:"+MCURIConstants.userCompleteProfile;
+	}
+	
+	@RequestMapping(params="completeprofile", method=RequestMethod.GET)
+	public String createCompleteProfileForm(Model uiModel){
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
+		if(principal instanceof MCUser){
+			MCUser  currentUser = (MCUser)principal;
+			UserLogin userLogin = new UserLogin();
+			userLogin.setUsername(currentUser.getUsername());
+			userLogin.setCompanyCode(currentUser.getCompanyCode());
+			UserProfile profile = userService.getUserProfile(currentUser.getUsername(), currentUser.getCompanyCode());
+			uiModel.addAttribute("profile", profile);	
+			uiModel.addAttribute("secQuestions", userService.getSecurityQuestion());
+			return "user/completeprofile";
+		}
+		return "user/error";
+	}
+	
+	@RequestMapping(params="completeprofile", method=RequestMethod.POST)
+	public String updateProfileForm(@ModelAttribute UserProfile profile, Model model){
+		
+		System.out.println("Updating Profile: "+profile.getId()+" "+profile.getUserLogin().getUsername());
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
+		if(principal instanceof MCUser){
+			MCUser  currentUser = (MCUser)principal;
+			UserProfile pUserProfile = userService.getUserProfile(currentUser.getUsername(), currentUser.getCompanyCode());
+			pUserProfile.setFirstName(profile.getFirstName());
+			pUserProfile.setLastName(profile.getLastName());
+			pUserProfile.setSecurityQuestion(profile.getSecurityQuestion());
+			pUserProfile.setSecurityAnswer(profile.getSecurityAnswer());
+			userService.updateUserProfile(pUserProfile);
+			return "redirect:"+MCURIConstants.mycartAppUrl;
+		}
+		return "user/error";
 	}
 }
