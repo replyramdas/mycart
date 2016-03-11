@@ -34,13 +34,6 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public UserProfile getActiveUserProfile(String userName) throws EmptyResultDataAccessException{
-		TypedQuery<UserProfile> query = em.createQuery("Select userProfile from UserProfile userProfile where userProfile.userLogin.enabled = true and userProfile.userLogin.username = :userName", UserProfile.class);
-		query.setParameter("userName", userName);
-		return query.getSingleResult();
-	}
-	
-	@Override
 	public List<Role> getAllRoles() {
 		return em.createQuery("Select role from Role role",Role.class).getResultList();
 	}
@@ -52,7 +45,9 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public UserProfile getUserProfile(String userName, String companyCode) {
-		TypedQuery<UserProfile> query = em.createQuery("Select userProfile from UserProfile userProfile where userProfile.userLogin.username = :userName and userProfile.userLogin.companyCode = :companyCode", UserProfile.class);
+		TypedQuery<UserProfile> query = em.createQuery("Select userProfile from UserProfile userProfile where "
+				+ "userProfile.userLogin.username = :userName and "
+				+ "userProfile.userLogin.companyCode = :companyCode", UserProfile.class);
 		query.setParameter("userName", userName);
 		query.setParameter("companyCode", companyCode);
 		return query.getSingleResult();

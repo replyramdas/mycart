@@ -48,18 +48,6 @@ public class UserServiceImpl implements UserService {
 		return userDao.getListOfQuestions().stream().map(securityQuestion -> securityQuestion.getQuestion()).collect(Collectors.toList());
 	}
 
-//	@Override
-//	public UserProfile getUserProfile(String userName) throws EmptyResultDataAccessException{
-//			return userDao.getUserProfile(userName);
-//	}
-
-	@Override
-	public UserProfile getActiveUserProfile(String username) {
-		UserProfile profile = null;
-		profile = userDao.getActiveUserProfile(username);
-		return profile;
-	}
-
 	@Override
 	public Role getUserRole(String userName) {
 		//TODO: implement this

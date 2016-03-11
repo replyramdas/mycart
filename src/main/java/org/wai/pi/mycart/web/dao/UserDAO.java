@@ -10,7 +10,6 @@ public interface UserDAO {
 	public UserProfile createUserProfile(UserProfile profile);
 	public UserProfile updateUserProfile(UserProfile profile);
 	public UserProfile getUserProfile(String userName, String companyCode);
-	public UserProfile getActiveUserProfile(String userName);
 	public List<SecurityQuestion> getListOfQuestions();
 	public List<Role> getAllRoles();
 	public Role getRoleOfUser(String userName);
