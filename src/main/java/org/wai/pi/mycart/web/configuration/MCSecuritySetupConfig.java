@@ -45,16 +45,6 @@ public class MCSecuritySetupConfig extends WebSecurityConfigurerAdapter{
 	public void configureGlobal(AuthenticationManagerBuilder auth, 
 								AuthenticationProvider provider) throws Exception {
 
-	    inMemoryConfigurer()
-	        .withUser("admin:mycomp")
-	            .password("root123")
-	            .roles("ADMIN")
-	        .and()
-	        	.withUser("bill")
-	            .password("abc123")
-	            .roles("AUTHOR")
-	        .and()
-	        	.configure(auth);
 	    auth.authenticationProvider(daoAuthenticationProvider());
 	    auth.authenticationProvider(mycartAuthProvider);
 	    
@@ -70,7 +60,6 @@ public class MCSecuritySetupConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
         http
         .addFilterBefore(getFilter(), UsernamePasswordAuthenticationFilter.class)
-        //.addFilterAfter(new ChangePasswordFilter(), UsernamePasswordAuthenticationFilter.class)
         .authorizeRequests()
         .antMatchers(MCURIConstants.mycartAppUrl+"/**").access("hasRole('USER') OR hasRole('AUTHOR') OR hasRole('ADMIN')")
         .antMatchers(MCURIConstants.userBase+"/**").access("hasRole('ADMIN')")

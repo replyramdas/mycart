@@ -30,17 +30,26 @@ public class MCUserController {
 	
 	@RequestMapping(params="form", method=RequestMethod.GET)
 	public String createUserProfileForm(Model uiModel){
-		UserProfile profile = new UserProfile();
-		UserLogin login = new UserLogin();
-		login.setFirstTimeLogin(true);
-		profile.setUserLogin(login);
-		Role role = new Role();
-		profile.setRole(role);
-		uiModel.addAttribute("profile",profile);
-		Map<Long, String> rolesMap = getRolesMap();
-		uiModel.addAttribute("roles", rolesMap);
-		uiModel.addAttribute("secQuestions", userService.getSecurityQuestion());
-		return "user/create";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof MCUser){
+			MCUser initiatingUser = (MCUser)principal;
+			UserProfile profile = new UserProfile();
+			UserLogin login = new UserLogin();
+			login.setFirstTimeLogin(true);
+			login.setCompanyCode(initiatingUser.getCompanyCode());
+			profile.setUserLogin(login);
+			Role role = new Role();
+			profile.setRole(role);
+			uiModel.addAttribute("profile",profile);
+			//TODO: move below to complete profile page
+			Map<Long, String> rolesMap = getRolesMap();
+			uiModel.addAttribute("roles", rolesMap);
+			uiModel.addAttribute("secQuestions", userService.getSecurityQuestion());
+
+			return "user/create";
+		}
+
+		return "user/error";
 	}
 	
 	private Map<Long, String> getRolesMap() {

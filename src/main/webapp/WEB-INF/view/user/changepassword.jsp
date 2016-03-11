@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Change Password</title>
+<style type="text/css">
+form { 
+	margin: 0 auto; 
+	width:250px;
+}
+</style>
 </head>
 <body>
 <c:url value="${ MCURIConstants.userChangePassword }" var="changepassword"/>

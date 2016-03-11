@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.wai.pi.mycart.web.model.Role;
 import org.wai.pi.mycart.web.model.SecurityQuestion;
+import org.wai.pi.mycart.web.model.UserLogin;
+import org.wai.pi.mycart.web.model.UserProfile;
 /**
  * 
  * @author Ramdas Sawant
@@ -25,8 +27,8 @@ public class MCLoadDataForTesting implements ApplicationListener<ContextRefreshe
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		System.out.println("Invoked load Data !!");
-	    Role adminRole = new Role();
+	    
+		Role adminRole = new Role();
 	    adminRole.setName("ROLE_ADMIN");
 	    adminRole.setDescription("For Admin tasks");
 
@@ -53,11 +55,23 @@ public class MCLoadDataForTesting implements ApplicationListener<ContextRefreshe
 	    
 	    SecurityQuestion question2 = new SecurityQuestion();
 	    question2.setQuestion("Name of first Employer?");
-	    
-	    
-	    
+
 	    em.persist(question1);
 	    em.persist(question2);
+	    
+	    UserLogin adminUser = new UserLogin();
+	    adminUser.setUsername("admin");
+	    adminUser.setPassword("admin");
+	    adminUser.setCompanyCode("mycomp");
+	    adminUser.setEnabled(true);
+	    adminUser.setFirstTimeLogin(true);
+	    UserProfile adminProile = new UserProfile();
+	    adminProile.setUserLogin(adminUser);
+	    adminProile.setRole(adminRole);
+	    adminProile.setFirstName("Administrator");
+	    
+	    em.persist(adminProile);
+	    
 	    
 	}
 }

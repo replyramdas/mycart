@@ -5,6 +5,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="userApp">
 <head>
+<style type="text/css">
+form { 
+    margin: 0 auto; 
+    width:400px;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src="<c:url value='/resources/js/user.js'/>"></script>
@@ -15,11 +21,13 @@
 </head>
 <body ng-controller="userController">
 <c:url value="${ MCURIConstants.userCreate }" var="createuser"/>
+<div style="height: 50px">
+</div>
 <form:form method="POST" action="${createuser}" modelAttribute="profile" name="form">
    <table>
     <tr>
-        <td><form:label path="userLogin.companyCode">Company Code</form:label></td>
-        <td><form:input path="userLogin.companyCode" ng-model="companyCode"/></td>
+        <!-- <td><form:label path="userLogin.companyCode">Company Code</form:label></td> -->
+        <td><form:hidden path="userLogin.companyCode" ng-model="companyCode"/></td>
     </tr>  
     <tr>
         <td><form:label path="userLogin.username">User Name</form:label></td>
@@ -40,6 +48,7 @@
         <td><form:label path="role.name">Role</form:label></td>
         <td><form:select path="role.id" items="${roles}" /></td>
     </tr> 
+    <!-- move below two feilds to profile complete page -->
      <tr>
         <td><form:label path="securityQuestion">Question</form:label></td>
         <td><form:select path="securityQuestion" items="${secQuestions}" /></td>
@@ -60,6 +69,9 @@
       </td>
     </tr> -->
     <tr>
+        <td>
+        <span style="width: 50px"></span>
+        </td>
         <td colspan="2">
             <input type="submit" value="Submit"/>
         </td>
