@@ -8,7 +8,7 @@ public final class MCURIConstants {
 	
 	public static final String companyCodeParamName = "companycode";
 	
-	public static final String  userBase = "/app/u";
+	public static final String  userBase = "/user";
 	
 	public static final String  userCreate = userBase+"?form";
 	

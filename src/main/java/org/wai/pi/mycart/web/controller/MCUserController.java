@@ -72,7 +72,7 @@ public class MCUserController {
 		if(principal instanceof MCUser){
 			currentUser = (MCUser)principal;
 			userLogin.setUsername(currentUser.getUsername());
-			//userLogin.se
+			userLogin.setCompanyCode(currentUser.getCompanyCode());
 		}
 		uiModel.addAttribute("userLogin", userLogin);
 		return "user/changepassword";

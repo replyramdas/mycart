@@ -13,12 +13,14 @@
 <form:form method="POST" action="${changepassword}" modelAttribute="userLogin" name="form">
    <table>
     <tr>
-        <td><form:label path="username">User Name</form:label></td>
-        <td><form:input path="username" disabled="true" /></td>
+        <td><form:hidden path="username"/></td>
     </tr>  
     <tr>
+        <td><form:hidden path="companyCode"/></td>
+    </tr>     
+    <tr>
         <td><form:label path="password">Password</form:label></td>
-        <td><form:input path="password"/></td>
+        <td><form:password path="password"/></td>
     </tr>
     <tr>
         <td><form:label path="confirmPassword">Confirm Password</form:label></td>
