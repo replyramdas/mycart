@@ -2,6 +2,14 @@ package org.wai.pi.mycart.web;
 
 public final class MCURIConstants {
 
+	public static final String mycartHome= "/";
+	
+	public static final String mycartAbout = "/pu/about";
+	
+	public static final String accessDenied = "/pu/403";
+	
+	public static final String mycartContact = "/pu/contact";
+			
 	/* accessed by users */
 	public static final String mycartAppUrl = "/app";
 

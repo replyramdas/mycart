@@ -33,7 +33,7 @@ public class MCSecurityInterceptor implements HandlerInterceptor {
 			MCUser userDetails = (MCUser)principal;
 			UserProfile profile = userService.getUserProfile(userDetails.getUsername(), userDetails.getCompanyCode());
 			if(profile.getUserLogin().isFirstTimeLogin()){
-				RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(MCURIConstants.userChangePassword);
+				//RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(MCURIConstants.userChangePassword);
 				new DefaultRedirectStrategy().sendRedirect(request, response, MCURIConstants.userChangePassword);
 			}else{
 				System.out.println("---------------> logging in after change password");
