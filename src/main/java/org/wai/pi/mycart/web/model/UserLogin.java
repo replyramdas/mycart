@@ -20,10 +20,15 @@ public class UserLogin {
 	@Column(name="password")
 	private String password;
 	
+	private String confirmPassword;
+	
 	@Column(name="enabled")
 	private boolean enabled;
-
 	
+	@Column(name="firstlogin")
+	private boolean firstTimeLogin;
+
+
 	public UserLogin() {
 
 	}
@@ -61,4 +66,19 @@ public class UserLogin {
 	}
 
 	
+	public boolean isFirstTimeLogin() {
+		return firstTimeLogin;
+	}
+
+	public void setFirstTimeLogin(boolean firstTimeLogin) {
+		this.firstTimeLogin = firstTimeLogin;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}	
 }

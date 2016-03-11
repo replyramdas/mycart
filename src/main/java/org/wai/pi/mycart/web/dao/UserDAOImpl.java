@@ -65,4 +65,9 @@ public class UserDAOImpl implements UserDAO {
 		return query.getSingleResult();
 	}
 
+	@Override
+	public UserProfile updateUserProfile(UserProfile profile) {
+		return em.merge(profile);
+	}
+
 }

@@ -8,6 +8,7 @@ import org.wai.pi.mycart.web.model.UserProfile;
 
 public interface UserDAO {
 	public UserProfile createUserProfile(UserProfile profile);
+	public UserProfile updateUserProfile(UserProfile profile);
 	public UserProfile getUserProfile(String userName, String accountName);
 	public UserProfile getActiveUserProfile(String userName);
 	public List<SecurityQuestion> getListOfQuestions();

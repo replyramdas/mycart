@@ -15,12 +15,14 @@ public class MCSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
-		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-		if(userDetails.getUsername().equals("rsawant")){
-			setDefaultTargetUrl("/app/u?changepassword");
-		}else {
-			setDefaultTargetUrl(MCURIConstants.mycartAppUrl);
+		System.out.println("@@ "+authentication.getPrincipal().getClass().getName());
+		if(authentication.getPrincipal() instanceof MCUser){
+			MCUser userDetails = (MCUser)authentication.getPrincipal();
+			if(userDetails.isFirstTimeLogin()){
+				setDefaultTargetUrl("/app/u?changepassword");
+			}else {
+				setDefaultTargetUrl(MCURIConstants.mycartAppUrl);
+			}
 		}
 		super.onAuthenticationSuccess(request, response, authentication);
 	}

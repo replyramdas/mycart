@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.wai.pi.mycart.web.MCURIConstants;
 import org.wai.pi.mycart.web.model.Role;
 import org.wai.pi.mycart.web.model.UserLogin;
 import org.wai.pi.mycart.web.model.UserProfile;
+import org.wai.pi.mycart.web.security.MCUser;
 import org.wai.pi.mycart.web.service.UserService;
 
 @Controller
@@ -30,6 +32,7 @@ public class MCUserController {
 	public String createUserProfileForm(Model uiModel){
 		UserProfile profile = new UserProfile();
 		UserLogin login = new UserLogin();
+		login.setFirstTimeLogin(true);
 		profile.setUserLogin(login);
 		Role role = new Role();
 		profile.setRole(role);
@@ -52,6 +55,7 @@ public class MCUserController {
 			return "user/error";
 		}
 		UserLogin login = profile.getUserLogin();
+		login.setFirstTimeLogin(true);
 		String encryptedPassword = passwordEncoder.encode(login.getPassword());
 		login.setPassword(encryptedPassword);
 
@@ -61,9 +65,35 @@ public class MCUserController {
 	}
 	
 	@RequestMapping(params="changepassword", method=RequestMethod.GET)
-	public String changePassword(){
-		
+	public String createChangePasswordForm(Model uiModel){
+		MCUser currentUser = null;
+		UserLogin userLogin = new UserLogin();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof MCUser){
+			currentUser = (MCUser)principal;
+		}
+		if(currentUser != null){
+			userLogin.setUsername(currentUser.getUsername());
+		}
+		uiModel.addAttribute("userLogin", userLogin);
 		return "user/changepassword";
 	}
 	
+	
+	@RequestMapping(params="changepassword", method=RequestMethod.POST)
+	public String processChangePassword(@ModelAttribute UserLogin userLogin, Model model){
+		MCUser currentUser = null;
+	
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof MCUser){
+			currentUser = (MCUser)principal;
+		}
+		if(currentUser != null){
+			UserProfile profile = userService.getUserProfile(userLogin.getUsername(), currentUser.getCompanyCode());
+			profile.getUserLogin().setPassword(userLogin.getPassword());
+			profile.getUserLogin().setFirstTimeLogin(false);
+			userService.updateUserProfile(profile);
+		}		
+		return "redirect:"+MCURIConstants.mycartAppUrl;
+	}
 }

@@ -47,7 +47,9 @@ public class MCUserDetailsService implements UserDetailsService {
 				throw new UsernameNotFoundException(messageSourceAccessor.getMessage("MCUserDetailsService.userIdDisabled",new Object[]{userName}));
 			}
 			GrantedAuthority authority = new SimpleGrantedAuthority(profile.getRole().getName());
-			User userDetails = new User(profile.getUserLogin().getUsername(), profile.getUserLogin().getPassword(), Arrays.asList(authority));
+			MCUser userDetails = new MCUser(profile.getUserLogin().getUsername(), profile.getUserLogin().getPassword(), Arrays.asList(authority));
+			userDetails.setFirstTimeLogin(profile.getUserLogin().isFirstTimeLogin());
+			userDetails.setCompanyCode(profile.getAccountName());
 			return userDetails;
 		}catch(EmptyResultDataAccessException exp){
 			throw new UsernameNotFoundException(messageSourceAccessor.getMessage("MCUserDetailsService.userIdInvalid"));

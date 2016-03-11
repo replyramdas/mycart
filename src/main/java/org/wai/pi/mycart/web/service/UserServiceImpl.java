@@ -77,4 +77,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserProfile(userName, accountName);
 	}
 
+	@Override
+	public UserProfile updateUserProfile(UserProfile profile) {
+		// TODO Auto-generated method stub
+		return userDao.updateUserProfile(profile);
+	}
+
 }
