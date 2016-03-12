@@ -4,6 +4,7 @@ public final class MCURIConstants {
 
 	public static final String mycartHome= "/";
 	
+	public static final String mycartPublicContent = "/pu";
 	public static final String mycartAbout = "/pu/about";
 	
 	public static final String accessDenied = "/pu/403";
@@ -17,11 +18,13 @@ public final class MCURIConstants {
 
 	/* accessed by admins */
 	public static final String  userBase = "/user";
-	public static final String  userChangePassword = userBase+"?changepassword";
-	
-	public static final String  userCompleteProfile = userBase+"?completeprofile";	
-	
 	public static final String  userCreate = userBase+"?form";
+	
+	public static final String profile =  "/profile";
+	public static final String  userChangePassword = profile+"?changepassword";
+	public static final String  userCompleteProfile = profile+"?completeprofile";	
+	
+	
 	
 	
 

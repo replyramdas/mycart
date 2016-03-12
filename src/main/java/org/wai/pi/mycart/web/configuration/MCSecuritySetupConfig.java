@@ -61,8 +61,10 @@ public class MCSecuritySetupConfig extends WebSecurityConfigurerAdapter{
         http
         .addFilterBefore(getFilter(), UsernamePasswordAuthenticationFilter.class)
         .authorizeRequests()
-        .antMatchers(MCURIConstants.mycartAppUrl+"/**").access("hasRole('USER') OR hasRole('AUTHOR') OR hasRole('ADMIN')")
-        .antMatchers(MCURIConstants.userBase+"/**").access("hasRole('ADMIN') OR hasRole('USER')")
+        .antMatchers(MCURIConstants.mycartAppUrl+"/**",MCURIConstants.profile+"/**")
+        	.access("hasRole('USER') OR hasRole('AUTHOR') OR hasRole('ADMIN')")
+        .antMatchers(MCURIConstants.userBase+"/**")
+        	.access("hasRole('ADMIN')")
         .and()
         	.formLogin()
         	.loginPage(MCURIConstants.loginUrl)

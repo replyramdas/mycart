@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,9 @@ public class MCSecurityInterceptor implements HandlerInterceptor {
 	@Qualifier("userService")
 	UserService userService;
 	
+	@Autowired
+	RedirectStrategy redirectStrategy;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -33,10 +37,7 @@ public class MCSecurityInterceptor implements HandlerInterceptor {
 			MCUser userDetails = (MCUser)principal;
 			UserProfile profile = userService.getUserProfile(userDetails.getUsername(), userDetails.getCompanyCode());
 			if(profile.getUserLogin().isFirstTimeLogin()){
-				//RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(MCURIConstants.userChangePassword);
-				new DefaultRedirectStrategy().sendRedirect(request, response, MCURIConstants.userChangePassword);
-			}else{
-				System.out.println("---------------> logging in after change password");
+				redirectStrategy.sendRedirect(request, response, MCURIConstants.userChangePassword);
 			}
 		}
 		return true;

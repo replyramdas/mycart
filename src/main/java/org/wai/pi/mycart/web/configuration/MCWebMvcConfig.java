@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -72,5 +74,10 @@ public class MCWebMvcConfig extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(mcSecurityInterceptor).addPathPatterns(MCURIConstants.mycartAppUrl);
 		
+	}
+	
+	@Bean
+	public RedirectStrategy redirectStrategy(){
+		return new DefaultRedirectStrategy();
 	}
 }
