@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Complete Profile</title>
+<style type="text/css">
+body{
+    margin-top: 200px;
+    margin-left: 500px;
+}
+</style>
 </head>
 <body>
 <c:url value="${ MCURIConstants.userCompleteProfile }" var="completeprofile"/>
@@ -30,17 +36,14 @@
     </tr>
      <tr>
         <td><form:label path="securityQuestion">Question</form:label></td>
-        <td><form:select path="securityQuestion" items="${secQuestions}" /></td>
+        <td><form:select path="securityQuestion" items="${secQuestions}" style="width: 175px"/></td>
     </tr> 
     <tr>
         <td><form:label path="securityAnswer">Answer</form:label></td>
         <td><form:input path="securityAnswer" /></td>
     </tr>    
     <tr>
-        <td>
-        <span style="width: 50px"></span>
-        </td>
-        <td colspan="2">
+        <td colspan="2" align="right">
             <input type="submit" value="Submit"/>
         </td>
     </tr>

@@ -10,7 +10,10 @@
 <style type="text/css">
 form { 
 	margin: 0 auto; 
-	width:250px;
+	width:400px;
+}
+body{
+    margin-top: 200px;
 }
 </style>
 </head>
@@ -34,7 +37,7 @@ form {
     </tr>
     <tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" align="right">
             <input type="submit" value="Submit"/>
         </td>
     </tr>
