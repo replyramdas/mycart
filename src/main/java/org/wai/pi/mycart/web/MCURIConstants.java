@@ -39,7 +39,7 @@ public final class MCURIConstants {
 	
 	public static final String loginFailureUrl = "/au/l?error=true";
 	
-	public static final String loginProcessingUrl = "/j_spring_security_check";
+	public static final String loginProcessingUrl = "/processlogin";
 	
 	public static final String logoutSuccessUrl = "/au/l?logout";
 	

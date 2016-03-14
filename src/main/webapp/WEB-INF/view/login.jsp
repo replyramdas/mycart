@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="org.wai.pi.mycart.web.MCURIConstants" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,12 +10,13 @@
 <title>MyCart: Login</title>
 </head>
 <body>
+<c:url value="${ MCURIConstants.loginProcessingUrl }" var="loginProcessingUrl"/>
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Sign in to continue to MyCart</h1>
             <div class="account-wall">
-                <form class="form-signin" action="<c:url value='/j_spring_security_check' />" method='POST'>
+                <form class="form-signin" action='${loginProcessingUrl}' method='POST'>
                  <c:if test="${not empty param['error']}">
 					<div class="alert alert-danger" role="alert">
 					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
